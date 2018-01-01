@@ -16,14 +16,19 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 public class MainActivity extends AppCompatActivity {
+
+    //Asynctask innerclass
     public class MyAsyncTask extends AsyncTask<Void, Integer, Void> {
 
+        //Declaration of proress bar
         ProgressBar myProgressBar;
 
+        //constructor Asynctask
         public MyAsyncTask(ProgressBar target) {
             myProgressBar = target;
         }
 
+        //process running in bacground
         @Override
         protected Void doInBackground(Void... params) {
             for(int i=0; i<100; i++){
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
+        //updating bacground process
         @Override
         protected void onProgressUpdate(Integer... values) {
             myProgressBar.setProgress(values[0]);
@@ -40,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //declaration of button/ progressbars and asynctask for these
     Button buttonStart;
     ProgressBar progressBar1, progressBar2, progressBar3,progressBar4;
     MyAsyncTask asyncTask1, asyncTask2, asyncTask3,asyncTask4;
@@ -49,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //inilitiazation of views
         progressBar1 = (ProgressBar)findViewById(R.id.progressbar1);
         progressBar2 = (ProgressBar)findViewById(R.id.progressbar2);
         progressBar3 = (ProgressBar)findViewById(R.id.progressbar3);
@@ -57,11 +66,14 @@ public class MainActivity extends AppCompatActivity {
         buttonStart = (Button)findViewById(R.id.start);
         buttonStart.setOnClickListener(new View.OnClickListener(){
 
+
+            //onclick listner
             @Override
             public void onClick(View v) {
                 final boolean API_LEVEL_11
                         = android.os.Build.VERSION.SDK_INT > 11;
 
+                //providing process to all progress bar at time 0
                 progressBar1.setProgress(0);
                 progressBar2.setProgress(0);
                 progressBar3.setProgress(0);
